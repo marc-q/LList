@@ -7,16 +7,14 @@ typedef struct LList
 	struct LList *next;
 } LList;
 
-LList * llist_alloc            (void);
-LList * llist_last             (LList       *list);
+#define LLIST_FOR_EACH(pos, head) \
+	for ((pos) = (head); (pos) != NULL; (pos) = (pos)->next)
 
-void    llist_foreach          (LList       *list,
-                                void         func (void *data,
-                                                   void *udata),
-                                void        *udata);
+LList * llist_last             (LList       *list);
 
 LList * llist_append           (LList       *list,
                                 void        *data);
+
 LList * llist_prepend          (LList       *list,
                                 void        *data);
 
@@ -28,5 +26,7 @@ void *  llist_find_custom      (LList       *list,
                                 int          func (const void *data,
                                                    const void *udata),
                                 const void  *udata);
+
+size_t  llist_length           (LList       *list);
 
 #endif /* __LLIST_H__ */

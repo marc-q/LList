@@ -20,12 +20,6 @@
 #include "llist.h"
 
 LList *
-llist_alloc (void)
-{
-	return malloc (sizeof (LList));
-}
-
-LList *
 llist_last (LList *list)
 {
 	LList *last = list;
@@ -36,23 +30,11 @@ llist_last (LList *list)
 	return last;
 }
 
-void
-llist_foreach (LList *list,
-               void   func (void *data, void *udata),
-               void  *udata)
-{
-	while (list)
-	{
-		func (list->data, udata);
-		list = list->next;
-	}
-}
-
 LList *
 llist_append (LList *list,
               void  *data)
 {
-	LList *new = llist_alloc ();
+	LList *new = malloc (sizeof (LList));
 	
 	new->data = data;
 	new->next = NULL;
@@ -69,7 +51,7 @@ LList *
 llist_prepend (LList *list,
                void  *data)
 {
-	LList *new = llist_alloc ();
+	LList *new = malloc (sizeof (LList));
 	
 	new->data = data;
 	new->next = list;
@@ -122,4 +104,16 @@ llist_find_custom (LList      *list,
 		list = list->next;
 	}
 	return NULL;
+}
+
+size_t
+llist_length (LList *list)
+{
+	size_t len = 0;
+	while (list)
+	{
+		len++;
+		list = list->next;
+	}
+	return len;
 }

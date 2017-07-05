@@ -16,15 +16,6 @@ The `example` folder contains this as well as a Makefile to compile it.
 #include <string.h>
 #include "llist.h"
 
-static void
-print_entry (void *data,
-             void *udata)
-{
-	char *self = data;
-	
-	printf ("%.255s\n", self);
-}
-
 int
 main (void)
 {
@@ -34,13 +25,21 @@ main (void)
 	list = llist_append (list, strdup ("Hello"));
 	
 	// Should print the word Hello
-	llist_foreach (list, print_entry, NULL);
+	LList *pos;
+	
+	LLIST_FOR_EACH (pos, list)
+	{
+		printf ("%.255s\n", (char*)pos->data);
+	}
 	
 	// Make it a greeting to the World
 	list = llist_append (list, strdup (" World!"));
 
 	// Print all list entries
-	llist_foreach (list, print_entry, NULL);
+	LLIST_FOR_EACH (pos, list)
+	{
+		printf ("%.255s\n", (char*)pos->data);
+	}
 	
 	// Free the memory of all list entries
 	llist_free_full (list, free);
