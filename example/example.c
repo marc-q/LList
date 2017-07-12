@@ -38,12 +38,14 @@ main (void)
 	}
 	
 	// Make it a greeting to the World
-	list = llist_append (list, strdup (" World!"));
+	list = llist_append (list, strdup ("World!"));
 
-	// Print all list entries
+	// Print all list entries in one line
 	LLIST_FOR_EACH (pos, list)
 	{
-		printf ("%.255s\n", (char*)pos->data);
+		printf ("%.255s%c",
+		        (char*)pos->data,
+		        (pos->next == NULL ? '\n' : ' '));
 	}
 	
 	// Free the memory of all list entries
