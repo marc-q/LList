@@ -33,7 +33,7 @@ main (void)
 	}
 	
 	// Make it a greeting to the World
-	list = llist_append (list, strdup (" World!"));
+	list = llist_append (list, strdup ("World!"));
 
 	// Print all list entries in one line
 	LLIST_FOR_EACH (pos, list)
