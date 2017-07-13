@@ -98,7 +98,7 @@ llist_find_custom (LList      *list,
 {
 	while (list)
 	{
-		if (func (list->data, udata) == 0)
+		if (func (list->data, udata) == 1)
 			return list->data;
 		
 		list = list->next;
